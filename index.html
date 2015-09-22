@@ -237,7 +237,7 @@
         var file = document.location.href.split("?")[0];
         file = file.split("/")[file.split("/").length - 1];
         var subrestr = $("#subre").val()
-        window.history.pushState(null, null, file + "?r=" + subrestr);
+        window.history.pushState(null, null, file + "?r=" + subrestr+ "&level=" +level);
         getRedditFeed($("#subre").val());
     }
 
