@@ -73,6 +73,7 @@
 
     var picURL="";
     var picNum=0;
+    var level=1;
     var complete=false;
     var nowURL="";
 
@@ -146,7 +147,7 @@
             $("div#cell_"+ i)[0].className=$("div#cell_"+ i)[0].dataset.cls;
             answer += $("div#cell_"+ i)[0].className;
         }
-        shuffle(5+(Math.random()*4|0));
+        shuffle(5+(Math.random()*4)*level|0);
     }
     function clear(){
        $(".row>div").css("border","0px solid")
@@ -236,7 +237,7 @@
         var file = document.location.href.split("?")[0];
         file = file.split("/")[file.split("/").length - 1];
         var subrestr = $("#subre").val()
-        window.history.pushState(null, null, file + "?r=" + subrestr);
+        window.history.pushState(null, null, file + "?r=" + subrestr+ "&level=" +level);
         getRedditFeed($("#subre").val());
     }
 
@@ -258,6 +259,9 @@
         var param = getParam()
         if (param && param["r"]) {
             $("#subre").val(param["r"]) ;
+        }
+        if (param && param["level"]) {
+            level=parseFloat(param["level"]);
         }
         $("#subre").keypress(keyEnter);
         $("#subre").blur(changeSubre) ;
